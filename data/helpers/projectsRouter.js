@@ -55,14 +55,19 @@ router.post('/', (req, res) => {
 
 router.post('/:id/actions', (req, res) => {
     const projectInfo = { ...req.body, project_id: req.params.id};
-    Actions.insert(projectInfo)
-        .then(action => {
-            if(!req.params.id) {
-                res.status(404).json({ error: 'No project with that id.' })
+    Projects.get(req.params.id) 
+        .then(project => {
+            if(!project) {
+                return res.status(404).json({ error: 'No project with that id.'})
             } else {
-                res.status(201).json(action)
+                Actions.insert(projectInfo)
+                .then(action => {
+                    return res.status(201).json(action)
+                    
+                })
             }
-        })
+        }) 
+   
 })
 
 router.put('/:id', (req, res) => {
@@ -71,7 +76,7 @@ router.put('/:id', (req, res) => {
     
     Projects.update(id, updated)
         .then(
-            res.status(200).json(updated)
+           res.status(200).json(updated)
         )
         .catch(err => {
             console.log(err)
@@ -88,11 +93,11 @@ router.delete('/:id', (req, res) => {
 
     Projects.remove(id)
         .then(project => {
-           return res.status(200).json(project);
+           res.status(200).json(project);
         })
         .catch(err => {
             console.log(err)
-            return res.status(500).json({ error: 'Problem deleting project.' })
+            res.status(500).json({ error: 'Problem deleting project.' })
         })
 })
 
