@@ -42,7 +42,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 Routing, which allows yout to split your application.
 
-Helpers ex: res.status(), res.redirect()
+Middleware, allows for us to change things in a request or response.
 
 - [ ] Describe Middleware?
 
