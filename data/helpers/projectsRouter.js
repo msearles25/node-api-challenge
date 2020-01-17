@@ -59,6 +59,12 @@ router.post('/:id/actions', (req, res) => {
         .then(project => {
             if(!project) {
                 return res.status(404).json({ error: 'No project with that id.'})
+            } else if(projectInfo.notes === '' || !projectInfo.notes) {
+                return res.status(400).json({ error: 'You need notes!'})
+            } else if (projectInfo.description === '' || !projectInfo.description) {
+                return res.status(400).json({ error: 'You need a description!'})
+            } else if(projectInfo.description.length > 128) {
+                return res.status(400).json({ error: 'Too long, less than 128 characters.'})
             } else {
                 Actions.insert(projectInfo)
                 .then(action => {
@@ -86,14 +92,14 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const { id } = req.params;
-    
-    if(!req.body.id) {
+
+    if(!id) {
         return res.status(404).json({ error: 'No project with that ID.' })
-    }
+   }
 
     Projects.remove(id)
         .then(project => {
-           res.status(200).json(project);
+            res.status(200).json(project);
         })
         .catch(err => {
             console.log(err)
