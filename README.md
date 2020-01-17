@@ -40,13 +40,25 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Express adds extra functionality to our nodeJS server, it works kind of like React did for our frontend. It has the ability to build RESTful web services that can work with JSON.
+
+
 - [ ] Describe Middleware?
+
+Middleware is a function that sits in the middle of a request, it's able to modify the request or a response. It doesn't have to change it, it can also just watch the requests or responses.
 
 - [ ] Describe a Resource?
 
+A resource can be accessed with a specific unique URI. Resources are managed via HTTP methods, and mostly everything is a resource. A resource could be existing users, or posts or anything of the sort.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+An api can return status codes so the client knows if it was successful or not.
+
 - [ ] How can we partition our application into sub-applications?
+
+
+Using Express Routers, we're able to break the application up into smaller pieces, or sub-applications.
 
 ## Minimum Viable Product
 
