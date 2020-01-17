@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Actions = require('./actionModel');
+const Projects = require('./projectModel');
 
 const router = express.Router();
 
@@ -17,7 +18,21 @@ router.get('/', (req, res) => {
         })
 })
 
-
+router.put('/:id', (req, res) => {
+    Actions.update(req.params.id, req.body) 
+        .then(updated => {
+            if(!updated) {
+                return res.status(404).json({ error: 'That action does not exist.' })
+            } else {
+                return res.status(200).json(updated)
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ error: 'Problem updating action.'})
+        })
+    
+})
 
 router.delete('/:id', (req, res) => {
    Actions.remove(req.params.id)
