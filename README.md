@@ -40,8 +40,9 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
-Express adds extra functionality to our nodeJS server, it works kind of like React did for our frontend. It has the ability to build RESTful web services that can work with JSON.
+Routing, which allows yout to split your application.
 
+Helpers ex: res.status(), res.redirect()
 
 - [ ] Describe Middleware?
 

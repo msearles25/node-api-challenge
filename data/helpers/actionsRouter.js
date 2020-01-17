@@ -5,8 +5,6 @@ const Actions = require('./actionModel');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const { project_id } = req.body;
-
     Actions.get()
         .then(actions => {
             return res.status(200).json(actions)
