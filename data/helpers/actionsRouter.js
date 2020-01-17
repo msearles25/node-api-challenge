@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Actions = require('./actionModel');
+const Projects = require('./projectModel');
 
 const router = express.Router();
 
@@ -17,14 +18,13 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
 
-    Actions.get(req.params.id)
-        .then(action => {
-            if(!req.params.id) {
-                return res.statuts(404).json({ error: 'There is no action with that id.'})
+        Projects.getProjectActions(req.params.id) 
+        .then(actions => {
+            if (actions.length === 0) {
+                return res.status(404).json({ errror: 'No project with that id.'})
             } else {
-                return res.status(200).json(action)
+                return res.status(200).json(actions)
             }
-            
         })
         .catch(err => {
             console.log(err);
